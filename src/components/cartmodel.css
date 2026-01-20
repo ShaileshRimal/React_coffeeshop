@@ -1,0 +1,8 @@
+
+.cart-actions{
+    background-color: red;
+}
+.cart-actions button{
+    display: block;
+    background-color: white;
+}
