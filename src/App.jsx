@@ -7,6 +7,9 @@ import Menu from "./pages/Menu";
 import { useEffect, useState } from "react";
 import Dashboard from "./pages/Dashboard";
 import ErrorHandle from "./pages/ErrorHandle";
+import CartModel from "./pages/CartPage";
+import CartPage from "./pages/CartPage";
+import Checkout from "./pages/Checkout";
 
 
 
@@ -50,13 +53,15 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<LandingPage categories={categories} coffees={coffees}/>} />
+        <Route path='/' element={<LandingPage categories={categories} coffees={coffees} cart={cart} setCart={setCart}/>} />
+        <Route path="cartpage" element={<CartPage cart={cart} setCart={setCart} />} />
         <Route path='/my-intro' element={<MyIntro />} />
         <Route path='sign-up'  element={<SignIn/>} />
         <Route path='sign-up'>
           <Route path='dashboard' element={<Dashboard />} />
         </Route>
         <Route path='*' element={<ErrorHandle />} />
+        <Route path="/checkoutpage"  element={<Checkout cart={cart} setCart={setCart}/>} />
         <Route path='/menu' element={<Menu />}  />
       </Routes>
     </>
