@@ -3,26 +3,29 @@ import "./App.css";
 import LandingPage from "./pages/LandingPage";
 import MyIntro from "./pages/MyIntro";
 import SignIn from "./pages/SignIn"; 
-import Menu from "./pages/Menu";
 import { useEffect, useState } from "react";
 import Dashboard from "./pages/Dashboard";
 import ErrorHandle from "./pages/ErrorHandle";
-import CartModel from "./pages/CartPage";
 import CartPage from "./pages/CartPage";
 import Checkout from "./pages/Checkout";
+import Orderstatus from "./pages/Orderstatus";
+import Service from "./sections/Service";
 
 
-
+// https://corsproxy.io/?
 function App() {
 
   const [categories,setCategories] = useState([]);
   const [coffees,setCoffee] = useState([]);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(()=>{
+    const savedcart= localStorage.getItem("cart");
+    return savedcart? JSON.parse(savedcart): [];
+  });
 
   useEffect(()=>{
     const fetchcategories =async()=>{
     try{
-      const res = await fetch("https://corsproxy.io/?https://thenextcoders.com/coffee/cats.php")
+      const res = await fetch("https://thenextcoders.com/coffee/cats.php")
       const data = await res.json();
       setCategories(data);
     }
@@ -35,9 +38,14 @@ function App() {
   ,[])
 
   useEffect(()=>{
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+  }, [cart])
+
+  useEffect(()=>{
     const getcoffees =async()=>{
       try{
-        const res= await fetch("https://corsproxy.io/?https://thenextcoders.com/coffee/list.php");
+        const res= await fetch("https://thenextcoders.com/coffee/list.php");
         const data = await res.json();
         setCoffee(data);
       }
@@ -61,8 +69,9 @@ function App() {
           <Route path='dashboard' element={<Dashboard />} />
         </Route>
         <Route path='*' element={<ErrorHandle />} />
-        <Route path="/checkoutpage"  element={<Checkout cart={cart} setCart={setCart}/>} />
-        <Route path='/menu' element={<Menu />}  />
+        <Route path="/checkoutpage"  element={<Checkout cart={cart} setCart={setCart} />} />
+        <Route path="/orderstatus" element={< Orderstatus cart={cart} />} />
+        <Route path='/service' element={<Service />}  />
       </Routes>
     </>
     

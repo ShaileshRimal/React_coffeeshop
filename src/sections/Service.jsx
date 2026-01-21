@@ -1,10 +1,7 @@
-
-const Service = () =>{
-  return (
-    <>
-    <div>This is Service page</div>
-    </>
-  );
-};
+const Service = ()=>{
+    return (
+        <div>this is service</div>
+    )
+}
 
 export default Service;

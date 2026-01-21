@@ -3,6 +3,7 @@ import "./cartpage.css"
 import {Link} from "react-router-dom";
 
 const CartPage = ({cart, setCart}) =>{
+    console.log(cart)
 
     return (
         <>

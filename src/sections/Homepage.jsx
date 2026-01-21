@@ -31,7 +31,9 @@
 
     return (
       <>
-        <div style={{border:"1px soild gray", position: "relative"}}>
+
+        
+        <div style={{ position: "relative", display:"flex", flexDirection:"column", }}>
           <Filterbar categories={categories} setfilter={setfilter} cart={cart}/>
           <div className="item-cards-flex" >
             {mycoffee.map(coffee=>(
@@ -46,7 +48,7 @@
                     </p>
                     <p style={{margin:"0"}}>{coffee.price}</p>
                   </div>
-                  <button onClick={()=>{addToCart(coffee)}} style={{width:"100%", backgroundColor:"white", border:"none", borderRadius:5, height:30, marginTop:10}}>Add to Cart</button>
+                  <button onClick={()=>{addToCart(coffee); }} style={{width:"100%", backgroundColor:"white", border:"none", borderRadius:5, height:30, marginTop:10}}>Add to Cart</button>
                 </div>
             ))}
           </div>
@@ -54,7 +56,6 @@
           <Link to="cartpage" style={{textDecoration:"none", color:"black", backgroundColor:"antiquewhite", padding:"8px 12px", fontSize:30, borderRadius:12}}> Cart : {cart.length}</Link>
         </div>
           
-          <div ><Link to="./menu">Menu</Link> </div>
         </div>
       </>
     );
